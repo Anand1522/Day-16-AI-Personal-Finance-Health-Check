@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>💰 AI Personal Finance Health Check Pro</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+:root{
+
+--primary:#38bdf8;
+--success:#22c55e;
+--warning:#f59e0b;
+--danger:#ef4444;
+
+--bg1:#0f172a;
+--bg2:#1e1b4b;
+--bg3:#111827;
+
+--card:
+rgba(255,255,255,0.06);
+
+}
+
+body{
+
+background:
+linear-gradient(
+135deg,
+var(--bg1),
+var(--bg2),
+var(--bg3)
+);
+
+min-height:100vh;
+
+padding:25px;
+
+color:white;
+
+}
+
+.container{
+
+max-width:1500px;
+
+margin:auto;
+
+}
+
+.header{
+
+text-align:center;
+
+margin-bottom:25px;
+
+}
+
+.header h1{
+
+font-size:2.8rem;
+
+color:var(--primary);
+
+margin-bottom:10px;
+
+}
+
+.header p{
+
+color:#cbd5e1;
+
+font-size:1rem;
+
+}
+
+.main{
+
+display:grid;
+
+grid-template-columns:
+380px 1fr;
+
+gap:20px;
+
+}
+
+.panel{
+
+background:var(--card);
+
+backdrop-filter:blur(18px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:25px;
+
+padding:25px;
+
+}
+
+.panel h2{
+
+color:var(--primary);
+
+margin-bottom:20px;
+
+}
+
+label{
+
+display:block;
+
+margin-top:15px;
+
+margin-bottom:8px;
+
+font-weight:600;
+
+}
+
+input{
+
+width:100%;
+
+padding:13px;
+
+border:none;
+
+outline:none;
+
+border-radius:12px;
+
+background:#0f172a;
+
+color:white;
+
+font-size:15px;
+
+}
+
+input:focus{
+
+box-shadow:
+0 0 12px rgba(56,189,248,.4);
+
+}
+
+.action-buttons{
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+margin-top:25px;
+
+}
+
+button{
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+font-size:15px;
+
+}
+
+.analyze-btn{
+
+background:var(--primary);
+
+color:#0f172a;
+
+}
+
+.reset-btn{
+
+background:#334155;
+
+color:white;
+
+}
+
+button:hover{
+
+transform:
+translateY(-3px);
+
+}
+
+.dashboard{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(200px,1fr));
+
+gap:15px;
+
+margin-bottom:20px;
+
+}
+
+.card{
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
+padding:20px;
+
+text-align:center;
+
+}
+
+.card h3{
+
+font-size:14px;
+
+color:#94a3b8;
+
+margin-bottom:10px;
+
+}
+
+.card p{
+
+font-size:24px;
+
+font-weight:bold;
+
+color:var(--primary);
+
+}
+
+.health-section{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+margin:25px 0;
+
+}
+
+.health-circle{
+
+width:250px;
+
+height:250px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:
+conic-gradient(
+var(--success) 0deg,
+var(--success) 0deg,
+#334155 0deg
+);
+
+transition:1s;
+
+box-shadow:
+0 0 30px rgba(34,197,94,.25);
+
+}
+
+.inner-circle{
+
+width:185px;
+
+height:185px;
+
+background:#0f172a;
+
+border-radius:50%;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.inner-circle h2{
+
+font-size:3rem;
+
+}
+
+.inner-circle span{
+
+color:#94a3b8;
+
+}
+
+.legend{
+
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
+margin-bottom:20px;
+
+flex-wrap:wrap;
+
+}
+
+.legend-item{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+font-size:13px;
+
+color:#cbd5e1;
+
+}
+
+.legend-color{
+
+width:14px;
+
+height:14px;
+
+border-radius:50%;
+
+}
+
+.red{
+background:#ef4444;
+}
+
+.orange{
+background:#f59e0b;
+}
+
+.blue{
+background:#38bdf8;
+}
+
+.green{
+background:#22c55e;
+}
+
+.progress-section{
+
+margin-top:20px;
+
+}
+
+.progress-title{
+
+margin-bottom:8px;
+
+font-weight:600;
+
+}
+
+.progress{
+
+height:18px;
+
+background:#334155;
+
+border-radius:30px;
+
+overflow:hidden;
+
+margin-bottom:18px;
+
+}
+
+.bar{
+
+height:100%;
+
+width:0%;
+
+transition:1.2s;
+
+}
+
+.bar-green{
+background:#22c55e;
+}
+
+.bar-blue{
+background:#38bdf8;
+}
+
+.bar-orange{
+background:#f59e0b;
+}
+
+.bar-red{
+background:#ef4444;
+}
+
+.info-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:15px;
+
+margin-top:25px;
+
+}
+
+.info-card{
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
+padding:20px;
+
+}
+
+.info-card h3{
+
+color:var(--primary);
+
+margin-bottom:10px;
+
+}
+
+.info-card p{
+
+line-height:1.7;
+
+color:#e2e8f0;
+
+}
+
+
+/* =========================
+ACHIEVEMENT BADGES
+========================= */
+
+.badges-section{
+
+margin-top:25px;
+
+}
+
+.badges-title{
+
+color:var(--primary);
+
+margin-bottom:15px;
+
+font-size:1.1rem;
+
+}
+
+.badges{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:12px;
+
+}
+
+.badge{
+
+padding:10px 16px;
+
+border-radius:30px;
+
+background:
+rgba(56,189,248,.12);
+
+border:
+1px solid rgba(56,189,248,.25);
+
+font-size:14px;
+
+font-weight:600;
+
+color:#e2e8f0;
+
+transition:.3s;
+
+}
+
+.badge:hover{
+
+transform:translateY(-2px);
+
+}
+
+.badge.gold{
+
+background:
+rgba(245,158,11,.15);
+
+border:
+1px solid rgba(245,158,11,.4);
+
+}
+
+.badge.green{
+
+background:
+rgba(34,197,94,.15);
+
+border:
+1px solid rgba(34,197,94,.4);
+
+}
+
+.badge.red{
+
+background:
+rgba(239,68,68,.15);
+
+border:
+1px solid rgba(239,68,68,.4);
+
+}
+
+/* =========================
+AI REASONING SECTION
+========================= */
+
+.reasoning-card{
+
+margin-top:25px;
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
+padding:22px;
+
+}
+
+.reasoning-card h3{
+
+color:var(--primary);
+
+margin-bottom:12px;
+
+}
+
+.reasoning-card p{
+
+line-height:1.8;
+
+color:#e2e8f0;
+
+}
+
+/* =========================
+FUTURE PROJECTION
+========================= */
+
+.future-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+margin-top:25px;
+
+}
+
+.future-card{
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
+padding:20px;
+
+text-align:center;
+
+}
+
+.future-card h3{
+
+font-size:15px;
+
+margin-bottom:10px;
+
+color:#94a3b8;
+
+}
+
+.future-card p{
+
+font-size:22px;
+
+font-weight:bold;
+
+color:var(--success);
+
+}
+
+/* =========================
+REPORT SECTION
+========================= */
+
+.report-section{
+
+margin-top:25px;
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:20px;
+
+padding:20px;
+
+}
+
+.report-section h3{
+
+color:var(--primary);
+
+margin-bottom:15px;
+
+}
+
+.report-content{
+
+line-height:1.8;
+
+color:#e2e8f0;
+
+min-height:180px;
+
+}
+
+.report-content ul{
+
+padding-left:20px;
+
+}
+
+.report-content li{
+
+margin-bottom:8px;
+
+}
+
+/* =========================
+ACTION BUTTONS
+========================= */
+
+.bottom-actions{
+
+display:flex;
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+.copy-btn{
+
+background:var(--success);
+
+color:white;
+
+flex:1;
+
+}
+
+.download-btn{
+
+background:var(--primary);
+
+color:#0f172a;
+
+flex:1;
+
+}
+
+/* =========================
+EMPTY STATE
+========================= */
+
+.empty-state{
+
+text-align:center;
+
+padding:30px;
+
+color:#94a3b8;
+
+}
+
+.empty-state h3{
+
+margin-bottom:10px;
+
+}
+
+/* =========================
+LOADING ANIMATION
+========================= */
+
+.loading{
+
+display:none;
+
+margin-top:20px;
+
+text-align:center;
+
+}
+
+.spinner{
+
+width:50px;
+
+height:50px;
+
+border:5px solid #334155;
+
+border-top:5px solid var(--primary);
+
+border-radius:50%;
+
+animation:spin 1s linear infinite;
+
+margin:auto;
+
+}
+
+@keyframes spin{
+
+0%{
+transform:rotate(0deg);
+}
+
+100%{
+transform:rotate(360deg);
+}
+
+}
+
+/* =========================
+CARD ANIMATIONS
+========================= */
+
+.card,
+.info-card,
+.future-card,
+.reasoning-card,
+.report-section{
+
+animation:
+fadeUp .5s ease;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:
+translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:
+translateY(0);
+
+}
+
+}
+
+/* =========================
+FOOTER
+========================= */
+
+.footer{
+
+text-align:center;
+
+margin-top:25px;
+
+padding-top:15px;
+
+border-top:
+1px solid rgba(255,255,255,.08);
+
+color:#94a3b8;
+
+font-size:14px;
+
+}
+
+/* =========================
+MOBILE RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+.main{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:768px){
+
+body{
+
+padding:15px;
+
+}
+
+.header h1{
+
+font-size:2rem;
+
+}
+
+.dashboard{
+
+grid-template-columns:
+1fr 1fr;
+
+}
+
+.future-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.info-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.bottom-actions{
+
+flex-direction:column;
+
+}
+
+.health-circle{
+
+width:200px;
+
+height:200px;
+
+}
+
+.inner-circle{
+
+width:145px;
+
+height:145px;
+
+}
+
+.inner-circle h2{
+
+font-size:2.3rem;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+.badges{
+
+justify-content:center;
+
+}
+
+.header h1{
+
+font-size:1.8rem;
+
+}
+
+}
+
+/* =========================
+END OF DAY-16 V2 CSS
+========================= */
+
+
+
+/* PART-1A ENDS HERE */
+/* PART-1B CONTINUES WITH:
+Badges
+AI Reasoning
+Future Projection
+Report Section
+Mobile Responsive
+Footer
+Animations
+*/
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>💰 AI Personal Finance Health Check Pro</h1>
+
+<p>
+Analyze your financial health, spending habits, savings potential, wealth growth, and receive AI-powered financial insights.
+</p>
+
+</div>
+
+<div class="main">
+
+<div class="panel">
+
+<h2>📥 Financial Inputs</h2>
+
+<label>Monthly Income (₹)</label> <input type="number" id="income">
+
+<label>Rent / Housing (₹)</label> <input type="number" id="rent">
+
+<label>Food Expenses (₹)</label> <input type="number" id="food">
+
+<label>Transport Expenses (₹)</label> <input type="number" id="transport">
+
+<label>Entertainment (₹)</label> <input type="number" id="entertainment">
+
+<label>Investments (₹)</label> <input type="number" id="investment">
+
+<label>Emergency Fund (₹)</label> <input type="number" id="emergency">
+
+<div class="action-buttons">
+
+<button
+class="analyze-btn"
+onclick="analyzeFinance()">
+💰 Analyze Finance </button>
+
+<button
+class="reset-btn"
+onclick="resetFinance()">
+🔄 Reset </button>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="dashboard">
+
+<div class="card">
+<h3>Health Score</h3>
+<p id="scoreCard">0</p>
+</div>
+
+<div class="card">
+<h3>Risk Level</h3>
+<p id="riskValue">--</p>
+</div>
+
+<div class="card">
+<h3>Financial Age</h3>
+<p id="financialAge">--</p>
+</div>
+
+<div class="card">
+<h3>Wealth Potential</h3>
+<p id="wealthPotential">--</p>
+</div>
+
+</div>
+
+<div class="health-section">
+
+<div
+class="health-circle"
+id="healthCircle">
+
+<div class="inner-circle">
+
+<h2 id="healthScore">0</h2>
+
+<span>Score</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="legend">
+
+<div class="legend-item">
+<div class="legend-color red"></div>
+Poor
+</div>
+
+<div class="legend-item">
+<div class="legend-color orange"></div>
+Average
+</div>
+
+<div class="legend-item">
+<div class="legend-color blue"></div>
+Good
+</div>
+
+<div class="legend-item">
+<div class="legend-color green"></div>
+Excellent
+</div>
+
+</div>
+
+<div class="progress-section">
+
+<div class="progress-title">
+Savings Rate
+</div>
+
+<div class="progress">
+<div
+id="savingsBar"
+class="bar bar-green">
+</div>
+</div>
+
+<div class="progress-title">
+Investment Strength
+</div>
+
+<div class="progress">
+<div
+id="investmentBar"
+class="bar bar-blue">
+</div>
+</div>
+
+<div class="progress-title">
+Expense Efficiency
+</div>
+
+<div class="progress">
+<div
+id="expenseBar"
+class="bar bar-orange">
+</div>
+</div>
+
+<div class="progress-title">
+Emergency Readiness
+</div>
+
+<div class="progress">
+<div
+id="emergencyBar"
+class="bar bar-red">
+</div>
+</div>
+
+</div>
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<h3>
+🧠 Financial Personality
+</h3>
+
+<p id="personalityText">
+Analysis pending...
+</p>
+
+</div>
+
+<div class="info-card">
+
+<h3>
+🔥 Top Insight
+</h3>
+
+<p id="topInsight">
+Analysis pending...
+</p>
+
+</div>
+
+</div>
+
+<!-- =========================
+     ACHIEVEMENT BADGES
+========================= -->
+
+<div class="badges-section">
+
+<h3 class="badges-title">
+🏆 Financial Achievement Badges
+</h3>
+
+<div
+class="badges"
+id="badgesContainer">
+
+<div class="badge">
+Waiting for analysis...
+</div>
+
+</div>
+
+</div>
+
+<!-- =========================
+     AI REASONING
+========================= -->
+
+<div class="reasoning-card">
+
+<h3>
+🧠 AI Reasoning Engine
+</h3>
+
+<p id="reasoningText">
+
+AI explanation will appear here after analysis.
+
+</p>
+
+</div>
+
+<!-- =========================
+     FINANCIAL STABILITY
+========================= -->
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<h3>
+📊 Financial Stability
+</h3>
+
+<p id="stabilityText">
+
+Waiting for analysis...
+
+</p>
+
+</div>
+
+<div class="info-card">
+
+<h3>
+📈 Savings Trend Score
+</h3>
+
+<p id="trendText">
+
+Waiting for analysis...
+
+</p>
+
+</div>
+
+</div>
+
+<!-- =========================
+     FUTURE PROJECTIONS
+========================= -->
+
+<div class="future-grid">
+
+<div class="future-card">
+
+<h3>
+1 Year Projection
+</h3>
+
+<p id="future1Year">
+
+₹0
+
+</p>
+
+</div>
+
+<div class="future-card">
+
+<h3>
+3 Year Projection
+</h3>
+
+<p id="future3Year">
+
+₹0
+
+</p>
+
+</div>
+
+<div class="future-card">
+
+<h3>
+5 Year Projection
+</h3>
+
+<p id="future5Year">
+
+₹0
+
+</p>
+
+</div>
+
+</div>
+
+<!-- =========================
+     LOADING
+========================= -->
+
+<div
+class="loading"
+id="loadingBox">
+
+<div class="spinner"></div>
+
+<p style="margin-top:12px;">
+
+Analyzing your financial health...
+
+</p>
+
+</div>
+
+<!-- =========================
+     REPORT SECTION
+========================= -->
+
+<div class="report-section">
+
+<h3>
+📋 Complete Financial Report
+</h3>
+
+<div
+class="report-content"
+id="reportContent">
+
+<div class="empty-state">
+
+<h3>
+💰 Ready for Analysis
+</h3>
+
+<p>
+
+Enter your financial details and click
+"Analyze Finance" to generate a complete AI report.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="bottom-actions">
+
+<button
+class="copy-btn"
+onclick="copyReport()">
+
+📋 Copy Report
+
+</button>
+
+<button
+class="download-btn"
+onclick="downloadReport()">
+
+⬇ Download Report
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+Day 16 • 30 Days 30 AI Websites Challenge
+
+<br>
+
+AI Personal Finance Health Check Pro V2
+
+</div>
+
+</div>
+
+<!-- DAY-16 V2 PART-2 JAVASCRIPT STARTS BELOW -->
+
+<script>
+    let generatedReport = "";
+
+function analyzeFinance(){
+
+const income =
+Number(
+document.getElementById("income").value
+);
+
+const rent =
+Number(
+document.getElementById("rent").value
+);
+
+const food =
+Number(
+document.getElementById("food").value
+);
+
+const transport =
+Number(
+document.getElementById("transport").value
+);
+
+const entertainment =
+Number(
+document.getElementById("entertainment").value
+);
+
+const investment =
+Number(
+document.getElementById("investment").value
+);
+
+const emergency =
+Number(
+document.getElementById("emergency").value
+);
+
+const values = [
+income,
+rent,
+food,
+transport,
+entertainment,
+investment,
+emergency
+];
+
+for(let value of values){
+
+if(isNaN(value)){
+
+alert(
+"Please fill all fields."
+);
+
+return;
+
+}
+
+if(value < 0){
+
+alert(
+"Negative values are not allowed."
+);
+
+return;
+
+}
+
+}
+
+if(income <= 0){
+
+alert(
+"Income must be greater than zero."
+);
+
+return;
+
+}
+
+document.getElementById(
+"loadingBox"
+).style.display = "block";
+
+setTimeout(()=>{
+
+runAnalysis(
+income,
+rent,
+food,
+transport,
+entertainment,
+investment,
+emergency
+);
+
+document.getElementById(
+"loadingBox"
+).style.display = "none";
+
+},800);
+
+}
+
+function runAnalysis(
+income,
+rent,
+food,
+transport,
+entertainment,
+investment,
+emergency
+){
+
+const expenses =
+rent +
+food +
+transport +
+entertainment;
+
+const savings =
+income -
+expenses -
+investment;
+
+const savingsRate =
+Math.round(
+(savings / income) * 100
+);
+
+const investmentRate =
+Math.round(
+(investment / income) * 100
+);
+
+const expenseRate =
+Math.round(
+(expenses / income) * 100
+);
+
+const emergencyTarget =
+expenses * 6;
+
+const emergencyRate =
+Math.min(
+100,
+Math.round(
+(emergency / emergencyTarget) * 100
+)
+);
+
+let healthScore = 40;
+
+healthScore += savingsRate * 0.4;
+healthScore += investmentRate * 0.3;
+healthScore += emergencyRate * 0.2;
+healthScore += (100-expenseRate) * 0.1;
+
+healthScore =
+Math.round(
+healthScore
+);
+
+if(healthScore > 100)
+healthScore = 100;
+
+if(healthScore < 0)
+healthScore = 0;
+
+let riskLevel = "";
+
+if(healthScore >= 85){
+
+riskLevel = "Low";
+
+}
+
+else if(healthScore >= 60){
+
+riskLevel = "Medium";
+
+}
+
+else{
+
+riskLevel = "High";
+
+}
+
+let personality = "";
+let insight = "";
+
+if(healthScore >= 90){
+
+personality =
+"💎 Wealth Builder";
+
+insight =
+"Excellent financial discipline and wealth creation habits.";
+
+}
+
+else if(healthScore >= 80){
+
+personality =
+"🚀 Growth Investor";
+
+insight =
+"Strong savings and investment behavior.";
+
+}
+
+else if(healthScore >= 70){
+
+personality =
+"📈 Smart Planner";
+
+insight =
+"Good financial structure with room for optimization.";
+
+}
+
+else if(healthScore >= 60){
+
+personality =
+"🎯 Future Focused";
+
+insight =
+"Moderate financial planning and savings.";
+
+}
+
+else if(healthScore >= 50){
+
+personality =
+"⚖ Budget Balancer";
+
+insight =
+"Needs stronger savings consistency.";
+
+}
+
+else if(healthScore >= 40){
+
+personality =
+"💸 Lifestyle Spender";
+
+insight =
+"High spending habits reducing wealth growth.";
+
+}
+
+else if(healthScore >= 25){
+
+personality =
+"⚠ Risk Taker";
+
+insight =
+"Financial stability is weak.";
+
+}
+
+else{
+
+personality =
+"🚨 Financial Survivor";
+
+insight =
+"Urgent financial improvements needed.";
+
+}
+
+const wealthPotential =
+Math.min(
+100,
+Math.round(
+(
+investmentRate * 2 +
+savingsRate +
+emergencyRate
+) / 2
+)
+);
+
+const financialAge =
+Math.max(
+18,
+Math.round(
+45 - (healthScore / 4)
+)
+);
+
+const yearlySavings =
+Math.max(
+0,
+savings * 12
+);
+
+const future1 =
+yearlySavings;
+
+const future3 =
+yearlySavings * 3;
+
+const future5 =
+yearlySavings * 5;
+
+updateDashboard(
+healthScore,
+riskLevel,
+personality,
+insight,
+wealthPotential,
+financialAge,
+savingsRate,
+investmentRate,
+expenseRate,
+emergencyRate,
+future1,
+future3,
+future5,
+savings,
+income,
+expenses,
+investment
+);
+
+}
+
+function updateDashboard(
+healthScore,
+riskLevel,
+personality,
+insight,
+wealthPotential,
+financialAge,
+savingsRate,
+investmentRate,
+expenseRate,
+emergencyRate,
+future1,
+future3,
+future5,
+savings,
+income,
+expenses,
+investment
+){
+
+document.getElementById(
+"healthScore"
+).textContent = healthScore;
+
+document.getElementById(
+"scoreCard"
+).textContent = healthScore;
+
+document.getElementById(
+"riskValue"
+).textContent = riskLevel;
+
+document.getElementById(
+"financialAge"
+).textContent = financialAge;
+
+document.getElementById(
+"wealthPotential"
+).textContent =
+wealthPotential + "%";
+
+document.getElementById(
+"personalityText"
+).textContent =
+personality;
+
+document.getElementById(
+"topInsight"
+).textContent =
+insight;
+
+document.getElementById(
+"future1Year"
+).textContent =
+"₹" +
+future1.toLocaleString();
+
+document.getElementById(
+"future3Year"
+).textContent =
+"₹" +
+future3.toLocaleString();
+
+document.getElementById(
+"future5Year"
+).textContent =
+"₹" +
+future5.toLocaleString();
+
+document.getElementById(
+"savingsBar"
+).style.width =
+Math.max(
+0,
+Math.min(100,savingsRate)
+) + "%";
+
+document.getElementById(
+"investmentBar"
+).style.width =
+investmentRate + "%";
+
+document.getElementById(
+"expenseBar"
+).style.width =
+expenseRate + "%";
+
+document.getElementById(
+"emergencyBar"
+).style.width =
+emergencyRate + "%";
+
+updateHealthCircle(
+healthScore
+);
+
+generateBadges(
+healthScore,
+savingsRate,
+investmentRate,
+emergencyRate
+);
+
+generateReasoning(
+healthScore,
+savingsRate,
+investmentRate,
+emergencyRate
+);
+
+generateReport(
+healthScore,
+riskLevel,
+personality,
+wealthPotential,
+financialAge,
+income,
+expenses,
+investment,
+savings
+);
+
+generateStability(
+healthScore,
+savingsRate
+);
+
+}
+
+function updateHealthCircle(
+score
+){
+
+let color =
+"#22c55e";
+
+if(score < 40){
+
+color = "#ef4444";
+
+}
+else if(score < 70){
+
+color = "#f59e0b";
+
+}
+else if(score < 85){
+
+color = "#38bdf8";
+
+}
+
+const degree =
+(score / 100) * 360;
+
+document.getElementById(
+"healthCircle"
+).style.background =
+`conic-gradient(
+${color} ${degree}deg, #334155 ${degree}deg
+)`;
+
+document.getElementById(
+"healthScore"
+).style.color =
+color;
+
+}
+
+function generateBadges(
+score,
+savingsRate,
+investmentRate,
+emergencyRate
+){
+
+let badges = [];
+
+if(score >= 90)
+badges.push(
+"🏆 Wealth Master"
+);
+
+if(savingsRate >= 20)
+badges.push(
+"💰 Saver Badge"
+);
+
+if(investmentRate >= 15)
+badges.push(
+"📈 Investor Badge"
+);
+
+if(emergencyRate >= 80)
+badges.push(
+"🛡 Emergency Hero"
+);
+
+if(score >= 70)
+badges.push(
+"🎯 Budget Master"
+);
+
+if(badges.length === 0){
+
+badges.push(
+"🚀 Keep Improving"
+);
+
+}
+
+document.getElementById(
+"badgesContainer"
+).innerHTML =
+badges
+.map(
+badge =>
+`<div class="badge">
+${badge}
+
+</div>`
+)
+.join("");
+
+}
+
+function generateReasoning(
+score,
+savingsRate,
+investmentRate,
+emergencyRate
+){
+
+let reasons = [];
+
+if(savingsRate < 10){
+
+reasons.push(
+"Your savings rate is low."
+);
+
+}
+else{
+
+reasons.push(
+"Your savings rate is healthy."
+);
+
+}
+
+if(investmentRate < 10){
+
+reasons.push(
+"Investment allocation can improve."
+);
+
+}
+else{
+
+reasons.push(
+"Investment habits are strong."
+);
+
+}
+
+if(emergencyRate < 50){
+
+reasons.push(
+"Emergency fund is insufficient."
+);
+
+}
+else{
+
+reasons.push(
+"Emergency readiness is good."
+);
+
+}
+
+reasons.push(
+`Overall financial score: ${score}/100`
+);
+
+document.getElementById(
+"reasoningText"
+).innerHTML =
+reasons.join("<br>");
+
+}
+
+function generateStability(
+score,
+savingsRate
+){
+
+let stability = "";
+let trend = "";
+
+if(score >= 80){
+
+stability =
+"Excellent Stability";
+
+}
+else if(score >= 60){
+
+stability =
+"Stable";
+
+}
+else{
+
+stability =
+"Needs Improvement";
+
+}
+
+if(savingsRate >= 20){
+
+trend =
+"Growing Wealth 📈";
+
+}
+else if(savingsRate >= 10){
+
+trend =
+"Slow Growth ➡";
+
+}
+else{
+
+trend =
+"Declining Potential 📉";
+
+}
+
+document.getElementById(
+"stabilityText"
+).textContent =
+stability;
+
+document.getElementById(
+"trendText"
+).textContent =
+trend;
+
+}
+
+function generateReport(
+score,
+risk,
+personality,
+wealth,
+financialAge,
+income,
+expenses,
+investment,
+savings
+){
+
+generatedReport =
+
+`AI PERSONAL FINANCE REPORT
+
+Financial Score: ${score}/100
+
+Risk Level: ${risk}
+
+Financial Personality:
+${personality}
+
+Financial Age:
+${financialAge}
+
+Wealth Potential:
+${wealth}%
+
+Income:
+₹${income.toLocaleString()}
+
+Expenses:
+₹${expenses.toLocaleString()}
+
+Investment:
+₹${investment.toLocaleString()}
+
+${savings >= 0
+? `Savings:
+₹${savings.toLocaleString()}`
+: `⚠ Overspending:
+₹${Math.abs(savings).toLocaleString()}`
+}
+
+Generated by:
+AI Personal Finance Health Check Pro`;
+
+document.getElementById(
+"reportContent"
+).innerHTML =
+generatedReport
+.replaceAll(
+"\n",
+"<br>"
+);
+
+}
+
+function copyReport(){
+
+if(!generatedReport){
+
+alert(
+"Generate report first."
+);
+
+return;
+
+}
+
+navigator.clipboard.writeText(
+generatedReport
+);
+
+alert(
+"Report copied."
+);
+
+}
+
+function downloadReport(){
+
+if(!generatedReport){
+
+alert(
+"Generate report first."
+);
+
+return;
+
+}
+
+const blob =
+new Blob(
+[generatedReport],
+{
+type:"text/plain"
+}
+);
+
+const link =
+document.createElement(
+"a"
+);
+
+link.href =
+URL.createObjectURL(
+blob
+);
+
+link.download =
+`Finance_Report_${new Date()
+.toLocaleDateString("en-GB")
+.replaceAll("/","-")}.txt`;
+
+link.click();
+
+}
+
+function resetFinance(){
+
+document
+.querySelectorAll(
+"input"
+)
+.forEach(
+input =>
+input.value = ""
+);
+
+location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
