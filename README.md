@@ -6,6 +6,20 @@ AI Personal Finance Health Check Pro V2 is a finance analysis web application th
 
 The platform generates AI-powered insights, financial scores, wealth projections, risk assessments, and personalized recommendations to improve financial decision-making.
 
+## 🌐 Live Demo
+
+https://app.netlify.com/projects/ai-personal-finance-health-check/overview
+
+## 📸 Screenshots
+
+![Screenshot 1](Screenshots/Screenshot_1.png)
+
+![Screenshot 2](Screenshots/Screenshot_2.png)
+
+![Screenshot 3](Screenshots/Screenshot_3.png)
+
+![Screenshot 4](Screenshots/Screenshot_4.png)
+
 ## ✨ Features
 
 * Financial Health Score (0–100)
