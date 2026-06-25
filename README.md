@@ -8,7 +8,7 @@ The platform generates AI-powered insights, financial scores, wealth projections
 
 ## 🌐 Live Demo
 
-https://app.netlify.com/projects/ai-personal-finance-health-check/overview
+https://ai-personal-finance-health-check.netlify.app/
 
 ## 📸 Screenshots
 
